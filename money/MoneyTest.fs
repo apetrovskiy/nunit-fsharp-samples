@@ -1,7 +1,10 @@
-﻿module NUnit.Samples.MoneyTest
+﻿[<NUnit.Framework.TestFixture>]
+[<NUnit.Allure.Core.AllureNUnit>]
+module NUnit.Samples.MoneyTest
 
 open System
 open NUnit.Allure.Attributes
+open NUnit.Allure.Core
 open NUnit.Framework
 open NUnit.Samples.Money
 

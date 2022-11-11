@@ -1,8 +1,11 @@
+[<NUnit.Framework.TestFixture>]
+[<NUnit.Allure.Core.AllureNUnit>]
 module NUnit.Samples.AssertSyntaxTests
 
 open System
 open System.Collections
 open NUnit.Allure.Attributes
+open NUnit.Allure.Core
 open NUnit.Framework
 open NUnit.Framework.Constraints
 
@@ -20,20 +23,20 @@ open NUnit.Framework.Constraints
 /// </summary>
 
 [<Test>]
-[<AllureName("Check IsNull")>]
+[<AllureName("Assert.IsNull")>]
 let IsNull() =
     let nada : obj = null
     Assert.IsNull(nada)
     Assert.That(nada, Is.Null)
 
 [<Test>]
-[<AllureName("Check IsNotNull")>]
+[<AllureName("Assert.IsNotNull")>]
 let IsNotNull() =
     Assert.IsNotNull(42)
     Assert.That(42, Is.Not.Null)
 
 [<Test>]
-[<AllureName("Check IsTrue")>]
+[<AllureName("Assert.IsTrue")>]
 let IsTrue() =
     Assert.IsTrue(2+2=4)
     Assert.True(2+2=4)
@@ -41,11 +44,13 @@ let IsTrue() =
     Assert.That(2+2=4)
 
 [<Test>]
+[<AllureName("Assert.IsFalse")>]
 let IsFalse() =
     Assert.IsFalse(2+2=5)
     Assert.That(2+2=5, Is.False)
 
 [<Test>]
+[<AllureName("Assert.IsNan")>]
 let IsNaN() =
     let d : double = Double.NaN
     let f : float = Double.NaN
@@ -55,6 +60,7 @@ let IsNaN() =
     Assert.That(f, Is.NaN)
 
 [<Test>]
+[<AllureName("Assert.IsEmpty, Assert.IsNotEmpty, Assert.That")>]
 let EmptyStringTests() =
     Assert.IsEmpty("")
     Assert.IsNotEmpty("Hello!")
