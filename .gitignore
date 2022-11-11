@@ -21,3 +21,4 @@ tools/*
 !tools/packages.config
 
 **/.idea/**
+InternalTrace*

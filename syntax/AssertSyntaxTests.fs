@@ -2,6 +2,7 @@ module NUnit.Samples.AssertSyntaxTests
 
 open System
 open System.Collections
+open NUnit.Allure.Attributes
 open NUnit.Framework
 open NUnit.Framework.Constraints
 
@@ -19,17 +20,20 @@ open NUnit.Framework.Constraints
 /// </summary>
 
 [<Test>]
+[<AllureName("Check IsNull")>]
 let IsNull() =
     let nada : obj = null
     Assert.IsNull(nada)
     Assert.That(nada, Is.Null)
 
 [<Test>]
+[<AllureName("Check IsNotNull")>]
 let IsNotNull() =
     Assert.IsNotNull(42)
     Assert.That(42, Is.Not.Null)
 
 [<Test>]
+[<AllureName("Check IsTrue")>]
 let IsTrue() =
     Assert.IsTrue(2+2=4)
     Assert.True(2+2=4)
