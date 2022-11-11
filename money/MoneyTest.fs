@@ -1,6 +1,10 @@
-﻿module NUnit.Samples.MoneyTest
+﻿[<NUnit.Framework.TestFixture>]
+[<NUnit.Allure.Core.AllureNUnit>]
+module NUnit.Samples.MoneyTest
 
 open System
+open NUnit.Allure.Attributes
+open NUnit.Allure.Core
 open NUnit.Framework
 open NUnit.Samples.Money
 
@@ -13,6 +17,7 @@ let fMB1 = new MoneyBag( [ f12CHF; f7USD ] )
 let fMB2 = new MoneyBag( [ f14CHF; f21USD ] )
 
 [<Test>]
+[<AllureName("Money is zero")>]
 let MoneyIsZero() =
     let zeroUSD = new Money(0, "USD")
     Assert.That(zeroUSD.IsZero)
