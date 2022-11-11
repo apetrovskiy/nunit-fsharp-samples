@@ -30,6 +30,18 @@ jobs:
       - name: Test
         run: |
           dotnet test --no-build --verbosity normal money/fs-money.sln
+      - name: Checking test results
+        if: always()
+        run: |
+          pwd
+          echo "report"
+          ls report
+          echo "report/allure-results"
+          ls report/allure-results
+      - uses: ./.github/actions/allure-upload
+        if: always()
+        with:
+          folder-name: report/allure-results
 
   fs-syntax:
     runs-on: ubuntu-latest
@@ -50,16 +62,14 @@ jobs:
       - name: Test
         run: |
           dotnet test --no-build --verbosity normal syntax/fs-syntax.sln
-
-  environment-data:
-    runs-on: ubuntu-latest
-    if: always()
-    needs:
-      - fs-money
-      - fs-syntax
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/allure-prep
+      - name: Checking test results
+        if: always()
+        run: |
+          pwd
+          echo "report"
+          ls report
+          echo "report/allure-results"
+          ls report/allure-results
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
@@ -68,7 +78,9 @@ jobs:
   allure:
     runs-on: ubuntu-latest
     if: always()
-    needs: environment-data
+    needs:
+      - fs-money
+      - fs-syntax
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
