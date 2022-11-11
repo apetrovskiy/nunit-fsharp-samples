@@ -5,30 +5,46 @@ name: .NET
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: ["develop"]
   pull_request:
-    branches: [ "develop" ]
+    branches: ["develop"]
+  workflow_dispatch:
 
 jobs:
-  build:
-
+  fs-money:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x
-    - name: Restore dependencies
-      run: |
-        dotnet restore money/fs-money.sln
-        dotnet restore syntax/fs-syntax.sln
-    - name: Build
-      run: |
-        dotnet build --no-restore money/fs-money.sln
-        dotnet build --no-restore syntax/fs-syntax.sln
-    - name: Test
-      run: |
-        dotnet test --no-build --verbosity normal money/fs-money.sln
-        dotnet test --no-build --verbosity normal syntax/fs-syntax.sln
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Restore dependencies
+        run: |
+          dotnet restore money/fs-money.sln
+      - name: Build
+        run: |
+          dotnet build --no-restore money/fs-money.sln
+      - name: Test
+        run: |
+          dotnet test --no-build --verbosity normal money/fs-money.sln
+
+  fs-syntax:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Restore dependencies
+        run: |
+          dotnet restore syntax/fs-syntax.sln
+      - name: Build
+        run: |
+          dotnet build --no-restore syntax/fs-syntax.sln
+      - name: Test
+        run: |
+          dotnet test --no-build --verbosity normal syntax/fs-syntax.sln
