@@ -19,3 +19,5 @@ TestResults
 packages/
 tools/*
 !tools/packages.config
+
+**/.idea/**
