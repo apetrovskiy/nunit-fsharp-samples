@@ -1,5 +1,11 @@
 [<NUnit.Framework.TestFixture>]
 [<NUnit.Allure.Core.AllureNUnit>]
+
+[<NUnit.Allure.Attributes.AllureEpic("Unit testing in F#")>]
+[<NUnit.Allure.Attributes.AllureFeature([| "Syntax tests" |])>]
+[<NUnit.Allure.Attributes.AllureStory([| "Syntax" |])>]
+[<NUnit.Allure.Attributes.AllureSuite("Syntax")>]
+[<NUnit.Allure.Attributes.AllureTag([| "Syntax" |])>]
 module NUnit.Samples.AssertSyntaxTests
 
 open System
