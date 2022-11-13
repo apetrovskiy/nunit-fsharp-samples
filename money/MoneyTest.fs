@@ -1,5 +1,11 @@
 ﻿[<NUnit.Framework.TestFixture>]
 [<NUnit.Allure.Core.AllureNUnit>]
+
+[<NUnit.Allure.Attributes.AllureEpic("Unit testing in F#")>]
+[<NUnit.Allure.Attributes.AllureFeature([| "Money tests" |])>]
+[<NUnit.Allure.Attributes.AllureStory([| "Money" |])>]
+[<NUnit.Allure.Attributes.AllureSuite("Money")>]
+[<NUnit.Allure.Attributes.AllureTag([| "Money" |])>]
 module NUnit.Samples.MoneyTest
 
 open System
