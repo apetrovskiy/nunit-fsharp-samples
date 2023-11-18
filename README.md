@@ -9,7 +9,7 @@ Test reports are available [here](https://apetrovskiy.github.io/nunit-fsharp-sam
 
 |Package       |Version |
 |:-------------|:-------|
-|.NET          |7.0     |
+|.NET          |8.0     |
 |NUnit         |3.13.3  |
 |Allure.Commons|3.5.0.73|
 |NUnit.Allure  |1.2.1.1 |
