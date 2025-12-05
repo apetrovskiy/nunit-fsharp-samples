@@ -10,5 +10,4 @@ runs:
   steps:
     - uses: actions/upload-artifact@v4
       with:
-        name: allure-results
         path: ${{ inputs.folder-name }}
