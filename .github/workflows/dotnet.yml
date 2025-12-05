@@ -41,6 +41,7 @@ jobs:
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
+          name: allure-results-01
           folder-name: report/allure-results
 
   fs-syntax:
@@ -73,6 +74,7 @@ jobs:
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
+          name: allure-results-02
           folder-name: report/allure-results
 
   allure:
