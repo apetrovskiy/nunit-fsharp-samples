@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/allure-prep
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
       - name: Restore dependencies
@@ -47,10 +47,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/allure-prep
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
       - name: Restore dependencies
@@ -83,10 +83,10 @@ jobs:
       - fs-syntax
     steps:
       - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
 
       - name: Get Allure history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         if: always()
         continue-on-error: true
         with:
@@ -94,12 +94,12 @@ jobs:
           path: gh-pages
 
       # - name: Allure Report with history
-      #   uses: simple-elf/allure-report-action@v1.5
+      #   uses: simple-elf/allure-report-action@v2
       #   if: always()
 
       - name: Allure Report action from marketplace
         # uses: neonlabsorg/allure-report-action@master
-        uses: simple-elf/allure-report-action@master
+        uses: simple-elf/allure-report-action@v2
         if: always()
         with:
           allure_results: allure-results
