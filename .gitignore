@@ -19,3 +19,7 @@ TestResults
 packages/
 tools/*
 !tools/packages.config
+
+**/.idea/**
+InternalTrace*
+report/**
