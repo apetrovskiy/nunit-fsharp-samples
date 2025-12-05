@@ -14,6 +14,7 @@ open NUnit.Allure.Attributes
 open NUnit.Allure.Core
 open NUnit.Framework
 open NUnit.Framework.Constraints
+open NUnit.Framework.Legacy
 
 /// <summary>
 /// This test fixture attempts to exercise all the syntactic
@@ -29,83 +30,83 @@ open NUnit.Framework.Constraints
 /// </summary>
 
 [<Test>]
-[<AllureName("Assert.IsNull")>]
+[<AllureName("ClassicAssert.IsNull")>]
 let IsNull() =
     let nada : obj = null
-    Assert.IsNull(nada)
+    ClassicAssert.IsNull(nada)
     Assert.That(nada, Is.Null)
 
 [<Test>]
-[<AllureName("Assert.IsNotNull")>]
+[<AllureName("ClassicAssert.IsNotNull")>]
 let IsNotNull() =
-    Assert.IsNotNull(42)
+    ClassicAssert.IsNotNull(42)
     Assert.That(42, Is.Not.Null)
 
 [<Test>]
-[<AllureName("Assert.IsTrue")>]
+[<AllureName("ClassicAssert.IsTrue")>]
 let IsTrue() =
-    Assert.IsTrue(2+2=4)
-    Assert.True(2+2=4)
+    ClassicAssert.IsTrue(2+2=4)
+    ClassicAssert.True(2+2=4)
     Assert.That(2+2=4, Is.True)
     Assert.That(2+2=4)
 
 [<Test>]
-[<AllureName("Assert.IsFalse")>]
+[<AllureName("ClassicAssert.IsFalse")>]
 let IsFalse() =
-    Assert.IsFalse(2+2=5)
+    ClassicAssert.IsFalse(2+2=5)
     Assert.That(2+2=5, Is.False)
 
 [<Test>]
-[<AllureName("Assert.IsNan")>]
+[<AllureName("ClassicAssert.IsNan")>]
 let IsNaN() =
     let d : double = Double.NaN
     let f : float = Double.NaN
-    Assert.IsNaN(d)
-    Assert.IsNaN(f)
+    ClassicAssert.IsNaN(d)
+    ClassicAssert.IsNaN(f)
     Assert.That(d, Is.NaN)
     Assert.That(f, Is.NaN)
 
 [<Test>]
-[<AllureName("Assert.IsEmpty, Assert.IsNotEmpty, Assert.That")>]
+[<AllureName("ClassicAssert.IsEmpty, ClassicAssert.IsNotEmpty, Assert.That")>]
 let EmptyStringTests() =
-    Assert.IsEmpty("")
-    Assert.IsNotEmpty("Hello!")
+    ClassicAssert.IsEmpty("")
+    ClassicAssert.IsNotEmpty("Hello!")
     Assert.That("", Is.Empty)
     Assert.That("Hello!", Is.Not.Empty)
 
 [<Test>]
 let EmptyCollectionTests() =
     // Lists
-    Assert.IsEmpty([])
-    Assert.IsNotEmpty([ 1; 2; 3 ])
+    ClassicAssert.IsEmpty([])
+    ClassicAssert.IsNotEmpty([ 1; 2; 3 ])
     Assert.That([], Is.Empty)
     Assert.That([ 1; 2; 3 ], Is.Not.Empty)
     //Arrays
-    Assert.IsEmpty([||])
-    Assert.IsNotEmpty([| 1; 2; 3 |])
+    ClassicAssert.IsEmpty([||])
+    ClassicAssert.IsNotEmpty([| 1; 2; 3 |])
     Assert.That([||], Is.Empty)
     Assert.That([| 1; 2; 3 |], Is.Not.Empty)
 
 [<Test>]
 let ExactTypeTests() =
-    Assert.AreEqual(typeof<string>, "Hello".GetType())
-    Assert.AreEqual("System.String", "Hello".GetType().FullName)
-    Assert.AreNotEqual(typeof<int>, "Hello".GetType())
-    Assert.AreNotEqual("System.Int32", "Hello".GetType().FullName)
+    ClassicAssert.AreEqual(typeof<string>, "Hello".GetType())
+    ClassicAssert.AreEqual("System.String", "Hello".GetType().FullName)
+    ClassicAssert.AreNotEqual(typeof<int>, "Hello".GetType())
+    ClassicAssert.AreNotEqual("System.Int32", "Hello".GetType().FullName)
     Assert.That("Hello", Is.TypeOf<string>())
     Assert.That("Hello", Is.Not.TypeOf<int>())
 
 [<Test>]
 let InstanceOfTypeTests() =
-    Assert.IsInstanceOf(typeof<string>, "Hello")
-    Assert.IsNotInstanceOf(typeof<string>, 5)
+    ClassicAssert.IsInstanceOf(typeof<string>, "Hello")
+    ClassicAssert.IsNotInstanceOf(typeof<string>, 5)
     Assert.That("Hello", Is.InstanceOf(typeof<string>))
     Assert.That(5, Is.Not.InstanceOf(typeof<string>))
 
 [<Test>]
 let AssignableFromTypeTests() =
-    Assert.IsAssignableFrom(typeof<string>, "Hello")
-    Assert.IsNotAssignableFrom(typeof<string>, 5)
+    ClassicAssert.IsAssignableFrom(typeof<string>, "Hello")
+    ClassicAssert.IsNotAssignableFrom(typeof<string>, 5)
     Assert.That( "Hello", Is.AssignableFrom(typeof<string>))
     Assert.That( 5, Is.Not.AssignableFrom(typeof<string>))
 
@@ -148,7 +149,7 @@ let EqualIgnoringCaseTests() =
     Assert.That(phrase, Is.EqualTo("hello world!").IgnoreCase)
     Assert.That(phrase, Is.Not.EqualTo("goodbye world!").IgnoreCase)
     Assert.That( [| "Hello"; "World" |], 
-        Is.EqualTo( [| "HELLO"; "WORLD" |] ).IgnoreCase)
+        Is.EqualTo<array<string>>( [| "HELLO"; "WORLD" |] ).IgnoreCase)
     Assert.That( [| "HELLO"; "Hello"; "hello" |],
         Is.All.EqualTo( "hello" ).IgnoreCase)
           
@@ -169,19 +170,19 @@ let EqualityTests() =
     let i3 = [| 1; 2; 3 |]
     let d3 = [| 1.0; 2.0; 3.0 |]
     let iunequal = [| 1; 3; 2 |]
-    Assert.AreEqual(4, 2 + 2)
-    Assert.AreEqual(i3, d3)
-    Assert.AreNotEqual(5, 2 + 2)
-    Assert.AreNotEqual(i3, iunequal)
+    ClassicAssert.AreEqual(4, 2 + 2)
+    ClassicAssert.AreEqual(i3, d3)
+    ClassicAssert.AreNotEqual(5, 2 + 2)
+    ClassicAssert.AreNotEqual(i3, iunequal)
     Assert.That(2 + 2, Is.EqualTo(4))
     Assert.That(2 + 2 = 4)
-    Assert.That(i3, Is.EqualTo(d3))
+    Assert.That(i3, Is.EqualTo<array<float>>(d3))
     Assert.That(2 + 2, Is.Not.EqualTo(5))
     Assert.That(i3, Is.Not.EqualTo(iunequal))
 
 [<Test>]
 let EqualityTestsWithTolerance() =
-    Assert.AreEqual(5.0, 4.99, 0.05)
+    ClassicAssert.AreEqual(5.0, 4.99, 0.05)
     Assert.That(4.99, Is.EqualTo(5.0).Within(0.05))
     Assert.That(4.0, Is.Not.EqualTo(5.0).Within(0.5))
     Assert.That(4.99f, Is.EqualTo(5.0f).Within(0.05f))
@@ -194,7 +195,7 @@ let EqualityTestsWithTolerance() =
 [<Test>]
 let EqualityTestsWithTolerance_MixedFloatAndDouble() =
     // Bug Fix 1743844
-    Assert.That(2.20492, Is.EqualTo(2.2).Within(0.01f),
+    Assert.That(2.20492, Is.EqualTo<float>(2.2).Within(0.01f),
         "Double actual, Double expected, Single tolerance")
     Assert.That(2.20492, Is.EqualTo(2.2f).Within(0.01),
         "Double actual, Single expected, Double tolerance" )
@@ -204,7 +205,7 @@ let EqualityTestsWithTolerance_MixedFloatAndDouble() =
         "Single actual, Single expected, Double tolerance")
     Assert.That(2.20492f, Is.EqualTo(2.2).Within(0.01),
         "Single actual, Double expected, Double tolerance")
-    Assert.That(2.20492f, Is.EqualTo(2.2).Within(0.01f),
+    Assert.That(2.20492f, Is.EqualTo<float>(2.2).Within(0.01f),
         "Single actual, Double expected, Single tolerance")
 
 [<Test>]
@@ -213,7 +214,7 @@ let EqualityTestsWithTolerance_MixingTypesGenerally() =
         "Double actual, Double expected, int tolerance")
     Assert.That( 4.87m, Is.EqualTo(5).Within(0.25),
         "Decimal actual, int expected, Double tolerance" )
-    Assert.That( 4.87m, Is.EqualTo(5ul).Within(1),
+    Assert.That( 4.87m, Is.EqualTo<decimal>(5ul).Within(1),
         "Decimal actual, ulong expected, int tolerance" )
     Assert.That( 487, Is.EqualTo(500).Within(25),
         "int actual, int expected, int tolerance" )
@@ -226,18 +227,18 @@ let EqualityTestsWithTolerance_MixingTypesGenerally() =
 
 [<Test>]
 let ComparisonTests() =
-    Assert.Greater(7, 3)
-    Assert.GreaterOrEqual(7, 3)
-    Assert.GreaterOrEqual(7, 7)
+    ClassicAssert.Greater(7, 3)
+    ClassicAssert.GreaterOrEqual(7, 3)
+    ClassicAssert.GreaterOrEqual(7, 7)
     Assert.That(7, Is.GreaterThan(3))
     Assert.That(7, Is.GreaterThanOrEqualTo(3))
     Assert.That(7, Is.AtLeast(3))
     Assert.That(7, Is.GreaterThanOrEqualTo(7))
     Assert.That(7, Is.AtLeast(7))
 
-    Assert.Less(3, 7)
-    Assert.LessOrEqual(3, 7)
-    Assert.LessOrEqual(3, 3)
+    ClassicAssert.Less(3, 7)
+    ClassicAssert.LessOrEqual(3, 7)
+    ClassicAssert.LessOrEqual(3, 3)
     Assert.That(3, Is.LessThan(7))
     Assert.That(3, Is.LessThanOrEqualTo(7))
     Assert.That(3, Is.AtMost(7))
@@ -295,8 +296,8 @@ let CollectionContainsTests() =
     let iarray = [| 1; 2; 3 |]
     let sarray = [| "a"; "b"; "c" |]
 
-    Assert.Contains(3, iarray)
-    Assert.Contains("b", sarray)
+    ClassicAssert.Contains(3, iarray)
+    ClassicAssert.Contains("b", sarray)
     CollectionAssert.Contains(iarray, 3)
     CollectionAssert.Contains(sarray, "b")
     CollectionAssert.DoesNotContain(sarray, "x")
@@ -384,10 +385,10 @@ let PropertyTests() =
     Assert.That( array2, Is.Not.Length.EqualTo( 4 ) )
     Assert.That( array2, Has.No.Property("Length").GreaterThan(3) )
 
-    Assert.That( List.Map( array2 ).Property("Length"), Is.EqualTo( [| 1; 2; 3 |] ) )
-    Assert.That( List.Map( array2 ).Property("Length"), Is.EquivalentTo( [| 3; 2; 1 |] ) )
-    Assert.That( List.Map( array2 ).Property("Length"), Is.SubsetOf( [| 1; 2; 3; 4; 5 |] ) )
-    Assert.That( List.Map( array2 ).Property("Length"), Is.Unique )
+    Assert.That( Array.map( fun (s: string) -> s.Length) array2, Is.EqualTo<array<int>>( [| 1; 2; 3 |] ) )
+    Assert.That( Array.map( fun (s: string) -> s.Length) array2, Is.EquivalentTo( [| 3; 2; 1 |] ) )
+    Assert.That( Array.map( fun (s: string) -> s.Length) array2, Is.SubsetOf( [| 1; 2; 3; 4; 5 |] ) )
+    Assert.That( Array.map( fun (s: string) -> s.Length) array2, Is.Unique )
 
     Assert.That( list, Has.Count.EqualTo( 4 ) )
 

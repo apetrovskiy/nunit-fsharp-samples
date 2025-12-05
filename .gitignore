@@ -25,3 +25,4 @@ InternalTrace*
 report/**
 
 .fake
+.vs/

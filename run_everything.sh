@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -rf report/allure-results
+
 projects=("money" "syntax")
 
 for project in "${projects[@]}"
