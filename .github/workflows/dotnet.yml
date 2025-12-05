@@ -94,12 +94,12 @@ jobs:
           path: gh-pages
 
       # - name: Allure Report with history
-      #   uses: simple-elf/allure-report-action@v2
+      #   uses: simple-elf/allure-report-action@master
       #   if: always()
 
       - name: Allure Report action from marketplace
         # uses: neonlabsorg/allure-report-action@master
-        uses: simple-elf/allure-report-action@v2
+        uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
