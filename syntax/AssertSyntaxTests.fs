@@ -14,6 +14,7 @@ open NUnit.Allure.Attributes
 open NUnit.Allure.Core
 open NUnit.Framework
 open NUnit.Framework.Constraints
+open NUnit.Framework.Legacy
 
 /// <summary>
 /// This test fixture attempts to exercise all the syntactic
@@ -29,298 +30,298 @@ open NUnit.Framework.Constraints
 /// </summary>
 
 [<Test>]
-[<AllureName("Assert.IsNull")>]
+[<AllureName("ClassicAssert.IsNull")>]
 let IsNull() =
     let nada : obj = null
-    Assert.IsNull(nada)
-    Assert.That(nada, Is.Null)
+    ClassicAssert.IsNull(nada)
+    ClassicAssert.That(nada, Is.Null)
 
 [<Test>]
-[<AllureName("Assert.IsNotNull")>]
+[<AllureName("ClassicAssert.IsNotNull")>]
 let IsNotNull() =
-    Assert.IsNotNull(42)
-    Assert.That(42, Is.Not.Null)
+    ClassicAssert.IsNotNull(42)
+    ClassicAssert.That(42, Is.Not.Null)
 
 [<Test>]
-[<AllureName("Assert.IsTrue")>]
+[<AllureName("ClassicAssert.IsTrue")>]
 let IsTrue() =
-    Assert.IsTrue(2+2=4)
-    Assert.True(2+2=4)
-    Assert.That(2+2=4, Is.True)
-    Assert.That(2+2=4)
+    ClassicAssert.IsTrue(2+2=4)
+    ClassicAssert.True(2+2=4)
+    ClassicAssert.That(2+2=4, Is.True)
+    ClassicAssert.That(2+2=4)
 
 [<Test>]
-[<AllureName("Assert.IsFalse")>]
+[<AllureName("ClassicAssert.IsFalse")>]
 let IsFalse() =
-    Assert.IsFalse(2+2=5)
-    Assert.That(2+2=5, Is.False)
+    ClassicAssert.IsFalse(2+2=5)
+    ClassicAssert.That(2+2=5, Is.False)
 
 [<Test>]
-[<AllureName("Assert.IsNan")>]
+[<AllureName("ClassicAssert.IsNan")>]
 let IsNaN() =
     let d : double = Double.NaN
     let f : float = Double.NaN
-    Assert.IsNaN(d)
-    Assert.IsNaN(f)
-    Assert.That(d, Is.NaN)
-    Assert.That(f, Is.NaN)
+    ClassicAssert.IsNaN(d)
+    ClassicAssert.IsNaN(f)
+    ClassicAssert.That(d, Is.NaN)
+    ClassicAssert.That(f, Is.NaN)
 
 [<Test>]
-[<AllureName("Assert.IsEmpty, Assert.IsNotEmpty, Assert.That")>]
+[<AllureName("ClassicAssert.IsEmpty, ClassicAssert.IsNotEmpty, ClassicAssert.That")>]
 let EmptyStringTests() =
-    Assert.IsEmpty("")
-    Assert.IsNotEmpty("Hello!")
-    Assert.That("", Is.Empty)
-    Assert.That("Hello!", Is.Not.Empty)
+    ClassicAssert.IsEmpty("")
+    ClassicAssert.IsNotEmpty("Hello!")
+    ClassicAssert.That("", Is.Empty)
+    ClassicAssert.That("Hello!", Is.Not.Empty)
 
 [<Test>]
 let EmptyCollectionTests() =
     // Lists
-    Assert.IsEmpty([])
-    Assert.IsNotEmpty([ 1; 2; 3 ])
-    Assert.That([], Is.Empty)
-    Assert.That([ 1; 2; 3 ], Is.Not.Empty)
+    ClassicAssert.IsEmpty([])
+    ClassicAssert.IsNotEmpty([ 1; 2; 3 ])
+    ClassicAssert.That([], Is.Empty)
+    ClassicAssert.That([ 1; 2; 3 ], Is.Not.Empty)
     //Arrays
-    Assert.IsEmpty([||])
-    Assert.IsNotEmpty([| 1; 2; 3 |])
-    Assert.That([||], Is.Empty)
-    Assert.That([| 1; 2; 3 |], Is.Not.Empty)
+    ClassicAssert.IsEmpty([||])
+    ClassicAssert.IsNotEmpty([| 1; 2; 3 |])
+    ClassicAssert.That([||], Is.Empty)
+    ClassicAssert.That([| 1; 2; 3 |], Is.Not.Empty)
 
 [<Test>]
 let ExactTypeTests() =
-    Assert.AreEqual(typeof<string>, "Hello".GetType())
-    Assert.AreEqual("System.String", "Hello".GetType().FullName)
-    Assert.AreNotEqual(typeof<int>, "Hello".GetType())
-    Assert.AreNotEqual("System.Int32", "Hello".GetType().FullName)
-    Assert.That("Hello", Is.TypeOf<string>())
-    Assert.That("Hello", Is.Not.TypeOf<int>())
+    ClassicAssert.AreEqual(typeof<string>, "Hello".GetType())
+    ClassicAssert.AreEqual("System.String", "Hello".GetType().FullName)
+    ClassicAssert.AreNotEqual(typeof<int>, "Hello".GetType())
+    ClassicAssert.AreNotEqual("System.Int32", "Hello".GetType().FullName)
+    ClassicAssert.That("Hello", Is.TypeOf<string>())
+    ClassicAssert.That("Hello", Is.Not.TypeOf<int>())
 
 [<Test>]
 let InstanceOfTypeTests() =
-    Assert.IsInstanceOf(typeof<string>, "Hello")
-    Assert.IsNotInstanceOf(typeof<string>, 5)
-    Assert.That("Hello", Is.InstanceOf(typeof<string>))
-    Assert.That(5, Is.Not.InstanceOf(typeof<string>))
+    ClassicAssert.IsInstanceOf(typeof<string>, "Hello")
+    ClassicAssert.IsNotInstanceOf(typeof<string>, 5)
+    ClassicAssert.That("Hello", Is.InstanceOf(typeof<string>))
+    ClassicAssert.That(5, Is.Not.InstanceOf(typeof<string>))
 
 [<Test>]
 let AssignableFromTypeTests() =
-    Assert.IsAssignableFrom(typeof<string>, "Hello")
-    Assert.IsNotAssignableFrom(typeof<string>, 5)
-    Assert.That( "Hello", Is.AssignableFrom(typeof<string>))
-    Assert.That( 5, Is.Not.AssignableFrom(typeof<string>))
+    ClassicAssert.IsAssignableFrom(typeof<string>, "Hello")
+    ClassicAssert.IsNotAssignableFrom(typeof<string>, 5)
+    ClassicAssert.That( "Hello", Is.AssignableFrom(typeof<string>))
+    ClassicAssert.That( 5, Is.Not.AssignableFrom(typeof<string>))
 
 [<Test>]
 let SubstringTests() =
     let phrase = "Hello World!"
     let array = [| "abc"; "bad"; "dba" |]
-    StringAssert.Contains("World", phrase)
-    Assert.That(phrase, Contains.Substring("World"))
-    Assert.That(phrase, Does.Not.Contain("goodbye"))
-    Assert.That(phrase, Contains.Substring("WORLD").IgnoreCase)
-    Assert.That(phrase, Does.Not.Contain("BYE").IgnoreCase)
-    Assert.That(array, Has.All.Contains( "b" ) )
+    StringClassicAssert.Contains("World", phrase)
+    ClassicAssert.That(phrase, Contains.Substring("World"))
+    ClassicAssert.That(phrase, Does.Not.Contain("goodbye"))
+    ClassicAssert.That(phrase, Contains.Substring("WORLD").IgnoreCase)
+    ClassicAssert.That(phrase, Does.Not.Contain("BYE").IgnoreCase)
+    ClassicAssert.That(array, Has.All.Contains( "b" ) )
 
 [<Test>]
 let StartsWithTests() =
     let phrase = "Hello World!"
     let greetings = [| "Hello!"; "Hi!"; "Hola!" |]
-    StringAssert.StartsWith("Hello", phrase);
-    Assert.That(phrase, Does.StartWith("Hello"))
-    Assert.That(phrase, Does.Not.StartWith("Hi!"))
-    Assert.That(phrase, Does.StartWith("HeLLo").IgnoreCase)
-    Assert.That(phrase, Does.Not.StartWith("HI").IgnoreCase)
-    Assert.That(greetings, Is.All.StartsWith("h").IgnoreCase)
+    StringClassicAssert.StartsWith("Hello", phrase);
+    ClassicAssert.That(phrase, Does.StartWith("Hello"))
+    ClassicAssert.That(phrase, Does.Not.StartWith("Hi!"))
+    ClassicAssert.That(phrase, Does.StartWith("HeLLo").IgnoreCase)
+    ClassicAssert.That(phrase, Does.Not.StartWith("HI").IgnoreCase)
+    ClassicAssert.That(greetings, Is.All.StartsWith("h").IgnoreCase)
 
 [<Test>]
 let EndsWithTests() =
     let phrase = "Hello World!"
     let greetings = [| "Hello!"; "Hi!"; "Hola!" |];
-    StringAssert.EndsWith("!", phrase)
-    Assert.That(phrase, Does.EndWith("!"))
-    Assert.That(phrase, Does.Not.EndWith("?"))
-    Assert.That(phrase, Does.EndWith("WORLD!").IgnoreCase)
-    Assert.That(greetings, Is.All.EndsWith("!"))
+    StringClassicAssert.EndsWith("!", phrase)
+    ClassicAssert.That(phrase, Does.EndWith("!"))
+    ClassicAssert.That(phrase, Does.Not.EndWith("?"))
+    ClassicAssert.That(phrase, Does.EndWith("WORLD!").IgnoreCase)
+    ClassicAssert.That(greetings, Is.All.EndsWith("!"))
 
 [<Test>]
 let EqualIgnoringCaseTests() =
     let phrase = "Hello World!"
-    StringAssert.AreEqualIgnoringCase("hello world!",phrase)
-    Assert.That(phrase, Is.EqualTo("hello world!").IgnoreCase)
-    Assert.That(phrase, Is.Not.EqualTo("goodbye world!").IgnoreCase)
-    Assert.That( [| "Hello"; "World" |], 
+    StringClassicAssert.AreEqualIgnoringCase("hello world!",phrase)
+    ClassicAssert.That(phrase, Is.EqualTo("hello world!").IgnoreCase)
+    ClassicAssert.That(phrase, Is.Not.EqualTo("goodbye world!").IgnoreCase)
+    ClassicAssert.That( [| "Hello"; "World" |], 
         Is.EqualTo( [| "HELLO"; "WORLD" |] ).IgnoreCase)
-    Assert.That( [| "HELLO"; "Hello"; "hello" |],
+    ClassicAssert.That( [| "HELLO"; "Hello"; "hello" |],
         Is.All.EqualTo( "hello" ).IgnoreCase)
           
 [<Test>]
 let RegularExpressionTests() =
     let phrase = "Now is the time for all good men to come to the aid of their country."
     let quotes = [| "Never say never"; "It's never too late"; "Nevermore!" |]
-    StringAssert.IsMatch( "all good men", phrase )
-    StringAssert.IsMatch( "Now.*come", phrase )
-    Assert.That( phrase, Does.Match( "all good men" ) )
-    Assert.That( phrase, Does.Match( "Now.*come" ) )
-    Assert.That( phrase, Does.Not.Match("all.*men.*good") )
-    Assert.That( phrase, Does.Match("ALL").IgnoreCase )
-    Assert.That( quotes, Is.All.Matches("never").IgnoreCase )
+    StringClassicAssert.IsMatch( "all good men", phrase )
+    StringClassicAssert.IsMatch( "Now.*come", phrase )
+    ClassicAssert.That( phrase, Does.Match( "all good men" ) )
+    ClassicAssert.That( phrase, Does.Match( "Now.*come" ) )
+    ClassicAssert.That( phrase, Does.Not.Match("all.*men.*good") )
+    ClassicAssert.That( phrase, Does.Match("ALL").IgnoreCase )
+    ClassicAssert.That( quotes, Is.All.Matches("never").IgnoreCase )
 
 [<Test>]
 let EqualityTests() =
     let i3 = [| 1; 2; 3 |]
     let d3 = [| 1.0; 2.0; 3.0 |]
     let iunequal = [| 1; 3; 2 |]
-    Assert.AreEqual(4, 2 + 2)
-    Assert.AreEqual(i3, d3)
-    Assert.AreNotEqual(5, 2 + 2)
-    Assert.AreNotEqual(i3, iunequal)
-    Assert.That(2 + 2, Is.EqualTo(4))
-    Assert.That(2 + 2 = 4)
-    Assert.That(i3, Is.EqualTo(d3))
-    Assert.That(2 + 2, Is.Not.EqualTo(5))
-    Assert.That(i3, Is.Not.EqualTo(iunequal))
+    ClassicAssert.AreEqual(4, 2 + 2)
+    ClassicAssert.AreEqual(i3, d3)
+    ClassicAssert.AreNotEqual(5, 2 + 2)
+    ClassicAssert.AreNotEqual(i3, iunequal)
+    ClassicAssert.That(2 + 2, Is.EqualTo(4))
+    ClassicAssert.That(2 + 2 = 4)
+    ClassicAssert.That(i3, Is.EqualTo(d3))
+    ClassicAssert.That(2 + 2, Is.Not.EqualTo(5))
+    ClassicAssert.That(i3, Is.Not.EqualTo(iunequal))
 
 [<Test>]
 let EqualityTestsWithTolerance() =
-    Assert.AreEqual(5.0, 4.99, 0.05)
-    Assert.That(4.99, Is.EqualTo(5.0).Within(0.05))
-    Assert.That(4.0, Is.Not.EqualTo(5.0).Within(0.5))
-    Assert.That(4.99f, Is.EqualTo(5.0f).Within(0.05f))
-    Assert.That(4.99m, Is.EqualTo(5.0m).Within(0.05m))
-    Assert.That(3999999999u, Is.EqualTo(4000000000u).Within(5u))
-    Assert.That(499, Is.EqualTo(500).Within(5))
-    Assert.That(4999999999L, Is.EqualTo(5000000000L).Within(5L))
-    Assert.That(5999999999UL, Is.EqualTo(6000000000UL).Within(5UL))
+    ClassicAssert.AreEqual(5.0, 4.99, 0.05)
+    ClassicAssert.That(4.99, Is.EqualTo(5.0).Within(0.05))
+    ClassicAssert.That(4.0, Is.Not.EqualTo(5.0).Within(0.5))
+    ClassicAssert.That(4.99f, Is.EqualTo(5.0f).Within(0.05f))
+    ClassicAssert.That(4.99m, Is.EqualTo(5.0m).Within(0.05m))
+    ClassicAssert.That(3999999999u, Is.EqualTo(4000000000u).Within(5u))
+    ClassicAssert.That(499, Is.EqualTo(500).Within(5))
+    ClassicAssert.That(4999999999L, Is.EqualTo(5000000000L).Within(5L))
+    ClassicAssert.That(5999999999UL, Is.EqualTo(6000000000UL).Within(5UL))
 
 [<Test>]
 let EqualityTestsWithTolerance_MixedFloatAndDouble() =
     // Bug Fix 1743844
-    Assert.That(2.20492, Is.EqualTo(2.2).Within(0.01f),
+    ClassicAssert.That(2.20492, Is.EqualTo(2.2).Within(0.01f),
         "Double actual, Double expected, Single tolerance")
-    Assert.That(2.20492, Is.EqualTo(2.2f).Within(0.01),
+    ClassicAssert.That(2.20492, Is.EqualTo(2.2f).Within(0.01),
         "Double actual, Single expected, Double tolerance" )
-    Assert.That(2.20492, Is.EqualTo(2.2f).Within(0.01f),
+    ClassicAssert.That(2.20492, Is.EqualTo(2.2f).Within(0.01f),
         "Double actual, Single expected, Single tolerance" )
-    Assert.That(2.20492f, Is.EqualTo(2.2f).Within(0.01),
+    ClassicAssert.That(2.20492f, Is.EqualTo(2.2f).Within(0.01),
         "Single actual, Single expected, Double tolerance")
-    Assert.That(2.20492f, Is.EqualTo(2.2).Within(0.01),
+    ClassicAssert.That(2.20492f, Is.EqualTo(2.2).Within(0.01),
         "Single actual, Double expected, Double tolerance")
-    Assert.That(2.20492f, Is.EqualTo(2.2).Within(0.01f),
+    ClassicAssert.That(2.20492f, Is.EqualTo(2.2).Within(0.01f),
         "Single actual, Double expected, Single tolerance")
 
 [<Test>]
 let EqualityTestsWithTolerance_MixingTypesGenerally() =
-    Assert.That(202.0, Is.EqualTo(200.0).Within(2),
+    ClassicAssert.That(202.0, Is.EqualTo(200.0).Within(2),
         "Double actual, Double expected, int tolerance")
-    Assert.That( 4.87m, Is.EqualTo(5).Within(0.25),
+    ClassicAssert.That( 4.87m, Is.EqualTo(5).Within(0.25),
         "Decimal actual, int expected, Double tolerance" )
-    Assert.That( 4.87m, Is.EqualTo(5ul).Within(1),
+    ClassicAssert.That( 4.87m, Is.EqualTo(5ul).Within(1),
         "Decimal actual, ulong expected, int tolerance" )
-    Assert.That( 487, Is.EqualTo(500).Within(25),
+    ClassicAssert.That( 487, Is.EqualTo(500).Within(25),
         "int actual, int expected, int tolerance" )
-    Assert.That( 487u, Is.EqualTo(500).Within(25),
+    ClassicAssert.That( 487u, Is.EqualTo(500).Within(25),
         "uint actual, int expected, int tolerance" )
-    Assert.That( 487L, Is.EqualTo(500).Within(25),
+    ClassicAssert.That( 487L, Is.EqualTo(500).Within(25),
         "long actual, int expected, int tolerance" )
-    Assert.That( 487ul, Is.EqualTo(500).Within(25),
+    ClassicAssert.That( 487ul, Is.EqualTo(500).Within(25),
         "ulong actual, int expected, int tolerance" )
 
 [<Test>]
 let ComparisonTests() =
-    Assert.Greater(7, 3)
-    Assert.GreaterOrEqual(7, 3)
-    Assert.GreaterOrEqual(7, 7)
-    Assert.That(7, Is.GreaterThan(3))
-    Assert.That(7, Is.GreaterThanOrEqualTo(3))
-    Assert.That(7, Is.AtLeast(3))
-    Assert.That(7, Is.GreaterThanOrEqualTo(7))
-    Assert.That(7, Is.AtLeast(7))
+    ClassicAssert.Greater(7, 3)
+    ClassicAssert.GreaterOrEqual(7, 3)
+    ClassicAssert.GreaterOrEqual(7, 7)
+    ClassicAssert.That(7, Is.GreaterThan(3))
+    ClassicAssert.That(7, Is.GreaterThanOrEqualTo(3))
+    ClassicAssert.That(7, Is.AtLeast(3))
+    ClassicAssert.That(7, Is.GreaterThanOrEqualTo(7))
+    ClassicAssert.That(7, Is.AtLeast(7))
 
-    Assert.Less(3, 7)
-    Assert.LessOrEqual(3, 7)
-    Assert.LessOrEqual(3, 3)
-    Assert.That(3, Is.LessThan(7))
-    Assert.That(3, Is.LessThanOrEqualTo(7))
-    Assert.That(3, Is.AtMost(7))
-    Assert.That(3, Is.LessThanOrEqualTo(3))
-    Assert.That(3, Is.AtMost(3))
+    ClassicAssert.Less(3, 7)
+    ClassicAssert.LessOrEqual(3, 7)
+    ClassicAssert.LessOrEqual(3, 3)
+    ClassicAssert.That(3, Is.LessThan(7))
+    ClassicAssert.That(3, Is.LessThanOrEqualTo(7))
+    ClassicAssert.That(3, Is.AtMost(7))
+    ClassicAssert.That(3, Is.LessThanOrEqualTo(3))
+    ClassicAssert.That(3, Is.AtMost(3))
 
 [<Test>]
 let AllItemsTests() =
     let ints = [| 1; 2; 3; 4 |]
     let doubles = [| 0.99; 2.1; 3.0; 4.05 |]
     let strings = [| "abc"; "bad"; "cab"; "bad"; "dad" |]
-    CollectionAssert.AllItemsAreNotNull(ints)
-    CollectionAssert.AllItemsAreInstancesOfType(ints, typeof<int>)
-    CollectionAssert.AllItemsAreInstancesOfType(strings, typeof<string>)
-    CollectionAssert.AllItemsAreUnique(ints)
-    Assert.That(ints, Is.All.Not.Null)
-    Assert.That(ints, Has.None.Null)
-    Assert.That(ints, Is.All.InstanceOf(typeof<int>))
-    Assert.That(ints, Has.All.InstanceOf(typeof<int>))
-    Assert.That(strings, Is.All.InstanceOf(typeof<string>))
-    Assert.That(strings, Has.All.InstanceOf(typeof<string>))
-    Assert.That(ints, Is.Unique)
-    Assert.That(strings, Is.Not.Unique)
-    Assert.That(ints, Is.All.GreaterThan(0))
-    Assert.That(ints, Has.All.GreaterThan(0));
-    Assert.That(ints, Has.None.LessThanOrEqualTo(0))
-    Assert.That(strings, Is.All.Contains( "a" ) )
-    Assert.That(strings, Has.All.Contains( "a" ) )
-    Assert.That(strings, Has.Some.StartsWith( "ba" ) )
-    Assert.That( strings, Has.Some.Property( "Length" ).EqualTo( 3 ) )
-    Assert.That( strings, Has.Some.StartsWith( "BA" ).IgnoreCase )
-    Assert.That( doubles, Has.Some.EqualTo( 1.0 ).Within( 0.05 ) )
+    CollectionClassicAssert.AllItemsAreNotNull(ints)
+    CollectionClassicAssert.AllItemsAreInstancesOfType(ints, typeof<int>)
+    CollectionClassicAssert.AllItemsAreInstancesOfType(strings, typeof<string>)
+    CollectionClassicAssert.AllItemsAreUnique(ints)
+    ClassicAssert.That(ints, Is.All.Not.Null)
+    ClassicAssert.That(ints, Has.None.Null)
+    ClassicAssert.That(ints, Is.All.InstanceOf(typeof<int>))
+    ClassicAssert.That(ints, Has.All.InstanceOf(typeof<int>))
+    ClassicAssert.That(strings, Is.All.InstanceOf(typeof<string>))
+    ClassicAssert.That(strings, Has.All.InstanceOf(typeof<string>))
+    ClassicAssert.That(ints, Is.Unique)
+    ClassicAssert.That(strings, Is.Not.Unique)
+    ClassicAssert.That(ints, Is.All.GreaterThan(0))
+    ClassicAssert.That(ints, Has.All.GreaterThan(0));
+    ClassicAssert.That(ints, Has.None.LessThanOrEqualTo(0))
+    ClassicAssert.That(strings, Is.All.Contains( "a" ) )
+    ClassicAssert.That(strings, Has.All.Contains( "a" ) )
+    ClassicAssert.That(strings, Has.Some.StartsWith( "ba" ) )
+    ClassicAssert.That( strings, Has.Some.Property( "Length" ).EqualTo( 3 ) )
+    ClassicAssert.That( strings, Has.Some.StartsWith( "BA" ).IgnoreCase )
+    ClassicAssert.That( doubles, Has.Some.EqualTo( 1.0 ).Within( 0.05 ) )
 
 [<Test>]
 let SomeItemTests() =
     let mixed = [| 1; 2; "3"; null; "four"; 100 |]: obj array
     let strings = [| "abc"; "bad"; "cab"; "bad"; "dad" |]
-    Assert.That(mixed, Has.Some.Null)
-    Assert.That(mixed, Has.Some.InstanceOf<int>())
-    Assert.That(mixed, Has.Some.InstanceOf<string>())
-    Assert.That(strings, Has.Some.StartsWith( "ba" ) )
-    Assert.That(strings, Has.Some.Not.StartsWith( "ba" ) )
+    ClassicAssert.That(mixed, Has.Some.Null)
+    ClassicAssert.That(mixed, Has.Some.InstanceOf<int>())
+    ClassicAssert.That(mixed, Has.Some.InstanceOf<string>())
+    ClassicAssert.That(strings, Has.Some.StartsWith( "ba" ) )
+    ClassicAssert.That(strings, Has.Some.Not.StartsWith( "ba" ) )
 
 [<Test>]
 let NoItemTests() =
     let ints = [| 1; 2; 3; 4; 5 |]
     let strings = [| "abc"; "bad"; "cab"; "bad"; "dad" |]
-    Assert.That(ints, Has.None.Null)
-    Assert.That(ints, Has.None.InstanceOf<string>());
-    Assert.That(ints, Has.None.GreaterThan(99));
-    Assert.That(strings, Has.None.StartsWith( "qu" ) );
+    ClassicAssert.That(ints, Has.None.Null)
+    ClassicAssert.That(ints, Has.None.InstanceOf<string>());
+    ClassicAssert.That(ints, Has.None.GreaterThan(99));
+    ClassicAssert.That(strings, Has.None.StartsWith( "qu" ) );
 
 [<Test>]
 let CollectionContainsTests() =
     let iarray = [| 1; 2; 3 |]
     let sarray = [| "a"; "b"; "c" |]
 
-    Assert.Contains(3, iarray)
-    Assert.Contains("b", sarray)
-    CollectionAssert.Contains(iarray, 3)
-    CollectionAssert.Contains(sarray, "b")
-    CollectionAssert.DoesNotContain(sarray, "x")
+    ClassicAssert.Contains(3, iarray)
+    ClassicAssert.Contains("b", sarray)
+    CollectionClassicAssert.Contains(iarray, 3)
+    CollectionClassicAssert.Contains(sarray, "b")
+    CollectionClassicAssert.DoesNotContain(sarray, "x")
     // Showing that Contains uses NUnit equality
-    CollectionAssert.Contains( iarray, 1.0 )
+    CollectionClassicAssert.Contains( iarray, 1.0 )
 
-    Assert.That(iarray, Has.Member(3))
-    Assert.That(sarray, Has.Member("b"))
-    Assert.That(sarray, Has.No.Member("x"))
+    ClassicAssert.That(iarray, Has.Member(3))
+    ClassicAssert.That(sarray, Has.Member("b"))
+    ClassicAssert.That(sarray, Has.No.Member("x"))
     // Showing that Contains uses NUnit equality
-    Assert.That(iarray, Has.Member( 1.0 ))
+    ClassicAssert.That(iarray, Has.Member( 1.0 ))
 
     // Only available using the new syntax
     // Note that EqualTo and SameAs do NOT give
     // identical results to Contains because 
     // Contains uses Object.Equals()
-    Assert.That(iarray, Has.Some.EqualTo(3))
-    Assert.That(iarray, Has.Member(3))
-    Assert.That(sarray, Has.Some.EqualTo("b"))
-    Assert.That(sarray, Has.None.EqualTo("x"))
-    Assert.That(iarray, Has.None.SameAs( 1.0 ))
-    Assert.That(iarray, Has.All.LessThan(10))
-    Assert.That(sarray, Has.All.Length.EqualTo(1))
-    Assert.That(sarray, Has.None.Property("Length").GreaterThan(3))
+    ClassicAssert.That(iarray, Has.Some.EqualTo(3))
+    ClassicAssert.That(iarray, Has.Member(3))
+    ClassicAssert.That(sarray, Has.Some.EqualTo("b"))
+    ClassicAssert.That(sarray, Has.None.EqualTo("x"))
+    ClassicAssert.That(iarray, Has.None.SameAs( 1.0 ))
+    ClassicAssert.That(iarray, Has.All.LessThan(10))
+    ClassicAssert.That(sarray, Has.All.Length.EqualTo(1))
+    ClassicAssert.That(sarray, Has.None.Property("Length").GreaterThan(3))
 
 [<Test>]
 let CollectionEquivalenceTests() =
@@ -328,29 +329,29 @@ let CollectionEquivalenceTests() =
     let twothrees = [| 1; 2; 3; 3; 4; 5 |]
     let twofours = [| 1; 2; 3; 4; 4; 5 |]
 
-    CollectionAssert.AreEquivalent( [| 2; 1; 4; 3; 5 |], ints1to5)
-    CollectionAssert.AreNotEquivalent( [| 2; 2; 4; 3; 5 |], ints1to5)
-    CollectionAssert.AreNotEquivalent( [| 2; 4; 3; 5 |], ints1to5)
-    CollectionAssert.AreNotEquivalent( [| 2; 2; 1; 1; 4; 3; 5 |], ints1to5)
-    CollectionAssert.AreNotEquivalent(twothrees, twofours)
+    CollectionClassicAssert.AreEquivalent( [| 2; 1; 4; 3; 5 |], ints1to5)
+    CollectionClassicAssert.AreNotEquivalent( [| 2; 2; 4; 3; 5 |], ints1to5)
+    CollectionClassicAssert.AreNotEquivalent( [| 2; 4; 3; 5 |], ints1to5)
+    CollectionClassicAssert.AreNotEquivalent( [| 2; 2; 1; 1; 4; 3; 5 |], ints1to5)
+    CollectionClassicAssert.AreNotEquivalent(twothrees, twofours)
 
-    Assert.That( [| 2; 1; 4; 3; 5 |], Is.EquivalentTo(ints1to5))
-    Assert.That( [| 2; 2; 4; 3; 5 |], Is.Not.EquivalentTo(ints1to5))
-    Assert.That( [| 2; 4; 3; 5 |], Is.Not.EquivalentTo(ints1to5))
-    Assert.That( [| 2; 2; 1; 1; 4; 3; 5 |], Is.Not.EquivalentTo(ints1to5))
+    ClassicAssert.That( [| 2; 1; 4; 3; 5 |], Is.EquivalentTo(ints1to5))
+    ClassicAssert.That( [| 2; 2; 4; 3; 5 |], Is.Not.EquivalentTo(ints1to5))
+    ClassicAssert.That( [| 2; 4; 3; 5 |], Is.Not.EquivalentTo(ints1to5))
+    ClassicAssert.That( [| 2; 2; 1; 1; 4; 3; 5 |], Is.Not.EquivalentTo(ints1to5))
 
 [<Test>]
 let SubsetTests() =
     let ints1to5 = [| 1; 2; 3; 4; 5 |]
 
-    CollectionAssert.IsSubsetOf( [| 1; 3; 5 |], ints1to5)
-    CollectionAssert.IsSubsetOf( [| 1; 2; 3; 4; 5 |], ints1to5)
-    CollectionAssert.IsNotSubsetOf( [| 2; 4; 6 |], ints1to5)
-    CollectionAssert.IsNotSubsetOf( [| 1; 2; 2; 2; 5 |], ints1to5)
+    CollectionClassicAssert.IsSubsetOf( [| 1; 3; 5 |], ints1to5)
+    CollectionClassicAssert.IsSubsetOf( [| 1; 2; 3; 4; 5 |], ints1to5)
+    CollectionClassicAssert.IsNotSubsetOf( [| 2; 4; 6 |], ints1to5)
+    CollectionClassicAssert.IsNotSubsetOf( [| 1; 2; 2; 2; 5 |], ints1to5)
 
-    Assert.That( [| 1; 3; 5 |], Is.SubsetOf(ints1to5))
-    Assert.That( [| 1; 2; 3; 4; 5 |], Is.SubsetOf(ints1to5))
-    Assert.That( [| 2; 4; 6 |], Is.Not.SubsetOf(ints1to5))
+    ClassicAssert.That( [| 1; 3; 5 |], Is.SubsetOf(ints1to5))
+    ClassicAssert.That( [| 1; 2; 3; 4; 5 |], Is.SubsetOf(ints1to5))
+    ClassicAssert.That( [| 2; 4; 6 |], Is.Not.SubsetOf(ints1to5))
 
 [<Test>]
 let PropertyTests() =
@@ -358,45 +359,45 @@ let PropertyTests() =
     let array2 = [| "a"; "ab"; "abc" |]
     let list = new System.Collections.ArrayList( array )
 
-    Assert.That( list, Has.Property( "Count" ) )
-    Assert.That( list, Has.No.Property( "Length" ) )
+    ClassicAssert.That( list, Has.Property( "Count" ) )
+    ClassicAssert.That( list, Has.No.Property( "Length" ) )
 
-    Assert.That( "Hello", Has.Length.EqualTo( 5 ) )
-    Assert.That( "Hello", Has.Length.LessThan( 10 ) )
-    Assert.That( "Hello", Has.Property("Length").EqualTo(5) )
-    Assert.That( "Hello", Has.Property("Length").GreaterThan(3) )
+    ClassicAssert.That( "Hello", Has.Length.EqualTo( 5 ) )
+    ClassicAssert.That( "Hello", Has.Length.LessThan( 10 ) )
+    ClassicAssert.That( "Hello", Has.Property("Length").EqualTo(5) )
+    ClassicAssert.That( "Hello", Has.Property("Length").GreaterThan(3) )
 
-    Assert.That( array, Has.Property( "Length" ).EqualTo( 4 ) )
-    Assert.That( array, Has.Length.EqualTo( 4 ) )
-    Assert.That( array, Has.Property( "Length" ).LessThan( 10 ) )
+    ClassicAssert.That( array, Has.Property( "Length" ).EqualTo( 4 ) )
+    ClassicAssert.That( array, Has.Length.EqualTo( 4 ) )
+    ClassicAssert.That( array, Has.Property( "Length" ).LessThan( 10 ) )
 
-    Assert.That( array, Has.All.Property("Length").EqualTo(3) )
-    Assert.That( array, Has.All.Length.EqualTo( 3 ) )
-    Assert.That( array, Is.All.Length.EqualTo( 3 ) )
-    Assert.That( array, Has.All.Property("Length").EqualTo(3) )
-    Assert.That( array, Is.All.Property("Length").EqualTo(3) )
+    ClassicAssert.That( array, Has.All.Property("Length").EqualTo(3) )
+    ClassicAssert.That( array, Has.All.Length.EqualTo( 3 ) )
+    ClassicAssert.That( array, Is.All.Length.EqualTo( 3 ) )
+    ClassicAssert.That( array, Has.All.Property("Length").EqualTo(3) )
+    ClassicAssert.That( array, Is.All.Property("Length").EqualTo(3) )
 
-    Assert.That( array2, Has.Some.Property("Length").EqualTo(2) )
-    Assert.That( array2, Has.Some.Length.EqualTo(2) )
-    Assert.That( array2, Has.Some.Property("Length").GreaterThan(2) )
+    ClassicAssert.That( array2, Has.Some.Property("Length").EqualTo(2) )
+    ClassicAssert.That( array2, Has.Some.Length.EqualTo(2) )
+    ClassicAssert.That( array2, Has.Some.Property("Length").GreaterThan(2) )
 
-    Assert.That( array2, Is.Not.Property("Length").EqualTo(4) )
-    Assert.That( array2, Is.Not.Length.EqualTo( 4 ) )
-    Assert.That( array2, Has.No.Property("Length").GreaterThan(3) )
+    ClassicAssert.That( array2, Is.Not.Property("Length").EqualTo(4) )
+    ClassicAssert.That( array2, Is.Not.Length.EqualTo( 4 ) )
+    ClassicAssert.That( array2, Has.No.Property("Length").GreaterThan(3) )
 
-    Assert.That( List.Map( array2 ).Property("Length"), Is.EqualTo( [| 1; 2; 3 |] ) )
-    Assert.That( List.Map( array2 ).Property("Length"), Is.EquivalentTo( [| 3; 2; 1 |] ) )
-    Assert.That( List.Map( array2 ).Property("Length"), Is.SubsetOf( [| 1; 2; 3; 4; 5 |] ) )
-    Assert.That( List.Map( array2 ).Property("Length"), Is.Unique )
+    ClassicAssert.That( List.Map( array2 ).Property("Length"), Is.EqualTo( [| 1; 2; 3 |] ) )
+    ClassicAssert.That( List.Map( array2 ).Property("Length"), Is.EquivalentTo( [| 3; 2; 1 |] ) )
+    ClassicAssert.That( List.Map( array2 ).Property("Length"), Is.SubsetOf( [| 1; 2; 3; 4; 5 |] ) )
+    ClassicAssert.That( List.Map( array2 ).Property("Length"), Is.Unique )
 
-    Assert.That( list, Has.Count.EqualTo( 4 ) )
+    ClassicAssert.That( list, Has.Count.EqualTo( 4 ) )
 
 [<Test>]
 let NotTests() =
-    Assert.That(42, Is.Not.Null)
-    Assert.That(42, Is.Not.True)
-    Assert.That(42, Is.Not.False)
-    Assert.That(2.5, Is.Not.NaN)
-    Assert.That(2 + 2, Is.Not.EqualTo(3))
-    Assert.That(2 + 2, Is.Not.Not.EqualTo(4))
-    Assert.That(2 + 2, Is.Not.Not.Not.EqualTo(5))
+    ClassicAssert.That(42, Is.Not.Null)
+    ClassicAssert.That(42, Is.Not.True)
+    ClassicAssert.That(42, Is.Not.False)
+    ClassicAssert.That(2.5, Is.Not.NaN)
+    ClassicAssert.That(2 + 2, Is.Not.EqualTo(3))
+    ClassicAssert.That(2 + 2, Is.Not.Not.EqualTo(4))
+    ClassicAssert.That(2 + 2, Is.Not.Not.Not.EqualTo(5))
